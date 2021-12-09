@@ -12,6 +12,7 @@ plugins {
 	id("java-library")
 	id("com.sandpolis.build.module")
 	id("com.sandpolis.build.publish")
+	id("com.sandpolis.build.jextract")
 }
 
 dependencies {
@@ -21,6 +22,16 @@ dependencies {
 	if (project.getParent() == null) {
 		implementation("com.sandpolis:core.foundation:+")
 	} else {
-		implementation(project(":module:com.sandpolis.core.foundation"))
+		implementation(project(":core:com.sandpolis.core.foundation"))
 	}
+}
+
+jextract {
+	invocations = mapOf(
+		"linux/if_packet.h" to listOf("jextract", "--source", "-d", "src/gen/java", "-t", "${project.name}.if_packet"),
+		"linux/if_ether.h" to listOf("jextract", "--source", "-d", "src/gen/java", "-t", "${project.name}.if_ether"),
+		"linux/if_arp.h" to listOf("jextract", "--source", "-d", "src/gen/java", "-t", "${project.name}.if_arp"),
+		"sys/socket.h" to listOf("jextract", "--source", "-d", "src/gen/java", "-t", "${project.name}.socket"),
+		"arpa/inet.h" to listOf("jextract", "--source", "-d", "src/gen/java", "-t", "${project.name}.inet"),
+	)
 }

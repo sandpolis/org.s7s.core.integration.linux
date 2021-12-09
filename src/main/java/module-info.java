@@ -8,8 +8,11 @@
 //                                                                            //
 //============================================================================//
 open module com.sandpolis.core.integration.linux {
-	exports com.sandpolis.core.integration.linux;
+	exports com.sandpolis.core.integration.linux.if_packet;
+	exports com.sandpolis.core.integration.linux.if_ether;
+	exports com.sandpolis.core.integration.linux.if_arp;
+	exports com.sandpolis.core.integration.linux.socket;
+	exports com.sandpolis.core.integration.linux.inet;
 
-	requires com.sandpolis.core.foundation;
-	requires org.slf4j;
+	requires jdk.incubator.foreign;
 }
